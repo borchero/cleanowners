@@ -100,7 +100,9 @@ def main():  # pragma: no cover
             ).decode_content()
 
         # Extract the usernames from the CODEOWNERS file
+        print("++ File contents:", codeowners_file_contents)
         usernames = get_usernames_from_codeowners(codeowners_file_contents)
+        print(">> Usernames:", usernames)
 
         usernames_to_remove = []
         codeowners_file_contents_new = None
