@@ -75,7 +75,7 @@ def main():  # pragma: no cover
             print(f"Skipping {repo.full_name} as it is in the exempt_repositories_list")
             continue
 
-        print(f"-- Processing repository {repo.full_name}...")
+        print(f"-- Processing repository {repo.full_name}...", flush=True)
 
         # Check to see if repository is archived
         if repo.archived:
@@ -100,9 +100,13 @@ def main():  # pragma: no cover
             ).decode_content()
 
         # Extract the usernames from the CODEOWNERS file
-        print("++ File contents:", codeowners_file_contents)
-        usernames = get_usernames_from_codeowners(codeowners_file_contents)
-        print(">> Usernames:", usernames)
+        print("++ File contents:", codeowners_file_contents, flush=True)
+        try:
+            usernames = get_usernames_from_codeowners(codeowners_file_contents)
+        except e:
+            print("!! Failure:", e, flush=True)
+            exit(1)
+        print(">> Usernames:", usernames, flush=True)
 
         usernames_to_remove = []
         codeowners_file_contents_new = None
