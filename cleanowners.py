@@ -75,6 +75,8 @@ def main():  # pragma: no cover
             print(f"Skipping {repo.full_name} as it is in the exempt_repositories_list")
             continue
 
+        print(f"-- Processing repository {repo.full_name}...")
+
         # Check to see if repository is archived
         if repo.archived:
             print(f"Skipping {repo.full_name} as it is archived")
